@@ -1,7 +1,8 @@
 # OOP
 
 
-I.	Yêu cầu thực tiễn
+I.	Yêu cầu thực tiễn.
+---
 1khách sạn có nhiều nhân viên, phân biệt qua mã nhân viên, 1 nv thuộc 1 nhóm nv, các nhóm nv phân biệt qua mã nhóm.
 Các công việc trong khách sạn phân biệt qua mã công việc, mỗi công việc thuộc 1 nhóm cv, phân biệt qua mã nhóm CV
 Khách hàng khi đến khách sạn, sẽ có hợp đồng thuê phòng. Mỗi KH có 1 mã KH, thuộc 1 loại KH. Mỗi loại KH phân biệt qua mã loại KH. 
@@ -15,10 +16,12 @@ Mỗi hóa đơn có thể trả cho nhiều hợp đồng, mỗi hóa đơn ch�
 ..............................................................................................................................................................
  
 
-II.	Mô hình ERD
+II.	Mô hình ERD.
+------
 ![alt text](https://github.com/CaoHoaiTan/OOP/blob/main/ERD/Demo.png)
  
-III.	Mô hình quan hệ
+III.	Mô hình quan hệ.
+-------
 NhanVien(maNV,tenNV,CMND,SDT,manhomNV...)
 nhomNV(manhomNV,manhomtruong,...)
 Khach(maKH,tenKH,CMND,SDT,maLK,...)
