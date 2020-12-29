@@ -10,8 +10,8 @@ namespace QuanLiKhachSan
     {
         public string ma_KH { get; set; }
         public string soPhong { get; set; }
-        public string soHD { get; set; }
-        public LAPHOPDONG(string ma_KH,string soPhong,string soHD)
+        public HopDong soHD { get; set; }
+        public LAPHOPDONG(string ma_KH,string soPhong,HopDong soHD)
         {
             this.ma_KH = ma_KH;
             this.soHD = soHD;

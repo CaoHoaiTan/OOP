@@ -9,14 +9,14 @@ namespace QuanLiKhachSan
     public class HopDong
     {
         public string so_HD { get; set; }
-        public string ma_KH { get; set; }
-        public string ma_DV { get; set; }
+        public KhachHang ma_KH { get; set; }
+        public DichVu ma_DV { get; set; }
         public string soPhong { get; set; }
         public string phuongThucThanhToan { get; set; }
         public string giaTien { get; set; }
         public string ngayNhanPhong { get; set; }
         public string ngayTraPhong { get; set; }
-        public HopDong(string so_HD,string ma_KH,string ma_DV,string soPhong,string phuongThucThanhToan,
+        public HopDong(string so_HD,KhachHang ma_KH,DichVu ma_DV,string soPhong,string phuongThucThanhToan,
             string giaTien,string ngayNhanPhong,string ngayTraPhong)
         {
             this.so_HD = so_HD;

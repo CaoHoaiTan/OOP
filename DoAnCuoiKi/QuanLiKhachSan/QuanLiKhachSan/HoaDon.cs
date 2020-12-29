@@ -12,9 +12,9 @@ namespace QuanLiKhachSan
         public HopDong so_HD { get; set; }
         public string giaTien { get; set; }
         public string ngayTraTien { get; set; }
-        public string ma_NV { get; set; }
-        public string ma_KH { get; set; }
-        public HoaDon(string so_HoaDon,HopDong so_HD,string giaTien,string ngayTraTien,string ma_NV,string ma_Kh)
+        public NhanVien ma_NV { get; set; }
+        public KhachHang ma_KH { get; set; }
+        public HoaDon(string so_HoaDon,HopDong so_HD,string giaTien,string ngayTraTien,NhanVien ma_NV,KhachHang ma_Kh)
         {
             this.so_HD = so_HD;
             this.so_HoaDon = so_HoaDon;

@@ -12,8 +12,8 @@ namespace QuanLiKhachSan
         public string ten_NV { get; set; }
         public string sdt_NV { get; set; }
         public string CMND_NV { get; set; }
-        public string ma_nhomNV{ get; set; }
-        public NhanVien(string ma_NV,string ten_NV,string sdt_NV,string CMND_NV,string ma_nhomNV)
+        public NhomNhanVien ma_nhomNV{ get; set; }
+        public NhanVien(string ma_NV,string ten_NV,string sdt_NV,string CMND_NV,NhomNhanVien ma_nhomNV)
         {
             this.ma_NV = ma_NV;
             this.ten_NV = ten_NV;

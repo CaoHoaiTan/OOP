@@ -8,10 +8,10 @@ namespace QuanLiKhachSan
 {
     public class THAOTACDICHVU
     {
-        public string ma_NV { get; set; }
-        public string ma_DV { get; set; }
-        public string ma_CV { get; set; }
-        public THAOTACDICHVU(string ma_NV,string ma_DV,string ma_CV)
+        public NhanVien ma_NV { get; set; }
+        public DichVu ma_DV { get; set; }
+        public CongViec ma_CV { get; set; }
+        public THAOTACDICHVU(NhanVien ma_NV,DichVu ma_DV,CongViec ma_CV)
         {
             this.ma_NV = ma_NV;
             this.ma_DV = ma_DV;
