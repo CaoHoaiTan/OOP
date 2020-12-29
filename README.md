@@ -27,18 +27,18 @@ III.	Mô hình quan hệ.
 - Khach(maKH,tenKH,CMND,SDT,maLK,...).
 - LoaiKhach(maLK,tenloaikhach,giatien,...).
 - Phong(soPhong,maLP,maThietbi,...)
--LoaiPhong(maLP,tenLoaiPhong,songuoi,giatien,...)
--Dichvu(maDV,giatien,...)
--HopDong(SoHD,maKH,soPhong,maDV,phuongthucthanhtoan,giatien,ngaynhanphong,ngaytra,...)
--HoaDon(soHoaDon,soHD,giatien,ngaythanhtoan,Nvthanhtoan,....)
--congViec(maCV,tencongviec,manhomCV,...)
--nhomCV(manhomCV,tennhom,....)
--thietbi(maTB,tenTB,...)
+- LoaiPhong(maLP,tenLoaiPhong,songuoi,giatien,...)
+- Dichvu(maDV,giatien,...)
+- HopDong(SoHD,maKH,soPhong,maDV,phuongthucthanhtoan,giatien,ngaynhanphong,ngaytra,...)
+- HoaDon(soHoaDon,soHD,giatien,ngaythanhtoan,Nvthanhtoan,....)
+- congViec(maCV,tencongviec,manhomCV,...)
+- nhomCV(manhomCV,tennhom,....)
+- thietbi(maTB,tenTB,...)
 
 //
--LapHD(maKH,soPhong,soHD)
--ThanhToan(soHoanDon,maNV,soHD)
--ThaoTacDV(maNV,maDV,maCV)
+- LapHD(maKH,soPhong,soHD)
+- ThanhToan(soHoanDon,maNV,soHD)
+- ThaoTacDV(maNV,maDV,maCV)
  
 
 
