@@ -1,4 +1,6 @@
 # OOP
+
+
 I.	Yêu cầu thực tiễn
 1khách sạn có nhiều nhân viên, phân biệt qua mã nhân viên, 1 nv thuộc 1 nhóm nv, các nhóm nv phân biệt qua mã nhóm.
 Các công việc trong khách sạn phân biệt qua mã công việc, mỗi công việc thuộc 1 nhóm cv, phân biệt qua mã nhóm CV
