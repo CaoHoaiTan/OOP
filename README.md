@@ -25,7 +25,7 @@ III.	Mô hình quan hệ.
 - NhanVien(maNV,tenNV,CMND,SDT,manhomNV...).
 - nhomNV(manhomNV,manhomtruong,...).
 - Khach(maKH,tenKH,CMND,SDT,maLK,...).
-- LoaiKhach(maLK,tenloaikhach,giatien,...).
+- LoaiKhach(maLK,tenloaikhach,...).
 - Phong(soPhong,maLP,maThietbi,...)
 - LoaiPhong(maLP,tenLoaiPhong,songuoi,giatien,...)
 - Dichvu(maDV,giatien,...)
