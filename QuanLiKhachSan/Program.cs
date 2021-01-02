@@ -88,12 +88,20 @@ namespace QuanLiKhachSan
         }
         public static void TaodsHopDong()
         {
-            dsHopDong.Add(new HopDong("HD001", dsKhachHang[0], dsDichVu[0], dsPhong[0], "Chuyen Khoang", "1/1/2021", 9, "10/1/2021", dsNhanVien[0]));
-            dsHopDong.Add(new HopDong("HD002", dsKhachHang[1], dsDichVu[1], dsPhong[1], "Tien Mat", "2/1/2021", 9, "11/1/2021", dsNhanVien[2]));
-            dsHopDong.Add(new HopDong("HD003", dsKhachHang[2], dsDichVu[2], dsPhong[2], "Quet The", "1/1/2021", 11, "12/1/2021", dsNhanVien[1]));
-            dsHopDong.Add(new HopDong("HD004", dsKhachHang[3], dsDichVu[3], dsPhong[3], "Chuyen Khoang", "1/1/2021", 9, "10/1/2021", dsNhanVien[0]));
-            dsHopDong.Add(new HopDong("HD005", dsKhachHang[4], dsDichVu[2], dsPhong[4], "Tien Mat", "2/1/2021", 9, "11/1/2021", dsNhanVien[1]));
-            dsHopDong.Add(new HopDong("HD006", dsKhachHang[5], dsDichVu[2], dsPhong[5], "Quet The", "1/1/2021", 11, "12/1/2021", dsNhanVien[1]));
+            dsHopDong.Add(new HopDong("HD001", dsKhachHang[0], dsDichVu[0], dsPhong[0], "Chuyen Khoang", "1/1/2021", 1, "2/1/2021", dsNhanVien[0]));
+            dsHopDong.Add(new HopDong("HD002", dsKhachHang[1], dsDichVu[1], dsPhong[1], "Tien Mat", "2/12/2021", 31, "2/1/2021", dsNhanVien[2]));
+            dsHopDong.Add(new HopDong("HD003", dsKhachHang[2], dsDichVu[2], dsPhong[2], "Quet The", "15/12/2020", 18, "2/1/2021", dsNhanVien[1]));
+            dsHopDong.Add(new HopDong("HD004", dsKhachHang[3], dsDichVu[3], dsPhong[3], "Chuyen Khoang", "2/12/2020", 32, "3/1/2021", dsNhanVien[0]));
+            dsHopDong.Add(new HopDong("HD005", dsKhachHang[4], dsDichVu[2], dsPhong[4], "Tien Mat", "25/12/2020", 7, "1/1/2021", dsNhanVien[1]));
+            dsHopDong.Add(new HopDong("HD006", dsKhachHang[5], dsDichVu[2], dsPhong[5], "Quet The", "27/12/2020", 7, "3/1/2021", dsNhanVien[1]));
+            dsHopDong.Add(new HopDong("HD007", dsKhachHang[3], dsDichVu[3], dsPhong[3], "Chuyen Khoang", "30/12/2020", 12, "10/1/2021", dsNhanVien[0]));
+            dsHopDong.Add(new HopDong("HD008", dsKhachHang[4], dsDichVu[2], dsPhong[4], "Tien Mat", "31/12/2020", 12, "11/1/2021", dsNhanVien[1]));
+            dsHopDong.Add(new HopDong("HD009", dsKhachHang[5], dsDichVu[2], dsPhong[5], "Quet The", "31/12/2020", 13, "12/1/2021", dsNhanVien[1]));
+            dsHopDong.Add(new HopDong("HD010", dsKhachHang[3], dsDichVu[3], dsPhong[3], "Chuyen Khoang", "26/1/2020", 25, "10/1/2021", dsNhanVien[0]));
+            dsHopDong.Add(new HopDong("HD011", dsKhachHang[4], dsDichVu[2], dsPhong[4], "Tien Mat", "28/12/2020", 14, "11/1/2021", dsNhanVien[1]));
+            dsHopDong.Add(new HopDong("HD012", dsKhachHang[5], dsDichVu[2], dsPhong[5], "Quet The", "27/12/2020", 16, "12/1/2021", dsNhanVien[1]));
+
+
         }
         public static void TaodsKhachHang()
         {
@@ -320,6 +328,14 @@ namespace QuanLiKhachSan
         public static void Tan3()
         {
             // Xuat cac phong con trong
+            var ph =
+                from p in dsPhong
+                where p.DATHUE == false
+                select p;
+            foreach ( var k in ph)
+            {
+                Console.WriteLine("soPhong: "+ k.soPhong + " LoaiPhong: "+ k.LoaiPhong.ten_LoaiPhong +" SoNguoi: "+k.LoaiPhong.soNguoi);
+            }
 
         }
         static void Main(string[] args)
@@ -341,14 +357,11 @@ namespace QuanLiKhachSan
             TaodsHoaDon();
             
 
-            for (int i = 0; i < 20; i++)
-                Console.WriteLine(dsPhong[i].DATHUE);
             //Nam1();
             //Kiet1();
             //Tan1();
             //Tan2();
-            //for(int i=0;i<5;i++)
-            //    Console.WriteLine(dsHopDong[i].giaTien);
+            Tan3();
             Console.ReadKey();
         }
     }
