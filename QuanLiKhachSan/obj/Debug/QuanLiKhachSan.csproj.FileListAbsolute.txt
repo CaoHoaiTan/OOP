@@ -1,0 +1,14 @@
+E:\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\obj\Debug\QuanLiKhachSan.csprojAssemblyReference.cache
+E:\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\obj\Debug\QuanLiKhachSan.csproj.CoreCompileInputs.cache
+E:\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\bin\Debug\QuanLiKhachSan.exe.config
+E:\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\bin\Debug\QuanLiKhachSan.exe
+E:\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\bin\Debug\QuanLiKhachSan.pdb
+E:\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\obj\Debug\QuanLiKhachSan.exe
+E:\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\obj\Debug\QuanLiKhachSan.pdb
+D:\OOP\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\obj\Debug\QuanLiKhachSan.csprojAssemblyReference.cache
+D:\OOP\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\obj\Debug\QuanLiKhachSan.csproj.CoreCompileInputs.cache
+D:\OOP\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\obj\Debug\QuanLiKhachSan.exe
+D:\OOP\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\obj\Debug\QuanLiKhachSan.pdb
+D:\OOP\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\bin\Debug\QuanLiKhachSan.exe.config
+D:\OOP\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\bin\Debug\QuanLiKhachSan.exe
+D:\OOP\DoAnCuoiKi\QuanLiKhachSan\QuanLiKhachSan\bin\Debug\QuanLiKhachSan.pdb

@@ -13,14 +13,15 @@ namespace QuanLiKhachSan
         public string sdt_NV { get; set; }
         public string CMND_NV { get; set; }
         public NhomNhanVien ma_nhomNV { get; set; }
-        public NhanVien(string ma_NV,string ten_NV,string sdt_NV,string CMND_NV,NhomNhanVien ma_nhomNV)
+        public CongViec CongViec { get; set; }
+        public NhanVien(string ma_NV,string ten_NV,string sdt_NV,string CMND_NV,NhomNhanVien ma_nhomNV, CongViec CongViec)
         {
             this.ma_NV = ma_NV;
             this.ten_NV = ten_NV;
             this.sdt_NV = sdt_NV;
             this.CMND_NV = CMND_NV;
             this.ma_nhomNV = ma_nhomNV;
-           
+            this.CongViec = CongViec; 
         }
         public NhanVien(NhanVien NV)
         {
