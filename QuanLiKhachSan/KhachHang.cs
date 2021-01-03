@@ -12,8 +12,8 @@ namespace QuanLiKhachSan
         public string ten_KH { get; set; }
         public string sdt_KH { get; set; }
         public string CMND_KH { get; set; }
-        public string ma_loaiKH { get; set; }
-        public KhachHang(string ma_KH, string ten_KH, string sdt_KH, string CMND_KH, string ma_loaiKH)
+        public LoaiKhachHang ma_loaiKH { get; set; }
+        public KhachHang(string ma_KH, string ten_KH, string sdt_KH, string CMND_KH, LoaiKhachHang ma_loaiKH)
         {
             this.ma_KH = ma_KH;
             this.ten_KH = ten_KH;

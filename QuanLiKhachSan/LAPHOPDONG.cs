@@ -16,6 +16,7 @@ namespace QuanLiKhachSan
             this.ma_KH = ma_KH;
             this.soHD = soHD;
             this.soPhong = soPhong;
+            soPhong.DaThue = true;
         }
         public LAPHOPDONG(LAPHOPDONG LapHD)
         {

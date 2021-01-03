@@ -9,19 +9,26 @@ namespace QuanLiKhachSan
     public class Phong
     {
         public string soPhong { get; set; }
-        public string ma_LoaiPhong { get; set; }
-        public string ma_ThietBi { get; set; }
-        public Phong(string soPhong,string ma_LoaiPhong,string ma_ThietBi)
+        public LoaiPhong LoaiPhong { get; set; }
+        public ThietBi[] ThietBi { get; set; }
+        public bool DaThue = false;
+        public Phong(string soPhong, LoaiPhong LoaiPhong, ThietBi ThietBi)
         {
             this.soPhong = soPhong;
-            this.ma_LoaiPhong = ma_LoaiPhong;
-            this.ma_ThietBi = ma_ThietBi;
+            this.LoaiPhong = LoaiPhong;
+            this.ThietBi = new ThietBi[] { ThietBi };
+        }
+        public Phong(string soPhong, LoaiPhong LoaiPhong, ThietBi ThietBi1, ThietBi ThietBi2, ThietBi ThietBi3)
+        {
+            this.soPhong = soPhong;
+            this.LoaiPhong = LoaiPhong;
+            this.ThietBi = new ThietBi[] { ThietBi1, ThietBi2 , ThietBi3};
         }
         public Phong(Phong PH)
         {
             this.soPhong = PH.soPhong;
-            this.ma_ThietBi = PH.ma_ThietBi;
-            this.ma_LoaiPhong = PH.ma_LoaiPhong;
+            this.ThietBi = PH.ThietBi;
+            this.LoaiPhong = PH.LoaiPhong;
 
         }
     }

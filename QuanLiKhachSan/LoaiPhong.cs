@@ -11,8 +11,8 @@ namespace QuanLiKhachSan
         public string ma_LoaiPhong { get; set; }
         public string ten_LoaiPhong { get; set; }
         public string soNguoi { get; set; }
-        public string giaTien { get; set; }
-        public LoaiPhong(string ma_LoaiPhong,string ten_LoaiPhong,string soNguoi,string giaTien)
+        public double giaTien { get; set; }
+        public LoaiPhong(string ma_LoaiPhong,string ten_LoaiPhong,string soNguoi,double giaTien)
         {
             this.ma_LoaiPhong = ma_LoaiPhong;
             this.ten_LoaiPhong = ten_LoaiPhong;
