@@ -480,6 +480,27 @@ namespace QuanLiKhachSan
 
 
         }
+        public static void Tan10()
+        {
+            //Tim hop dong của Cao Hoài Tấn nhiều tiền Nhất
+            var hd = from p in dsHopDong
+                     where p.NhanVien.ten_NV == "Cao Hoai Tan"
+                     group p by p.giaTien  into g
+                     select new
+                     {
+                        maxPrice  = g.Max()
+                     };
+
+            double max = (from p in hd
+                          select p.maxPrice.giaTien).Max();
+            Console.WriteLine("_________________________________________");
+            Console.WriteLine("Hop dong nhieu tien nhat cua Cao Hoai Tan co gia tien: {0}", max);
+            foreach (var a in hd)
+            {
+                if(a.maxPrice.giaTien == max)
+                    Console.WriteLine("Gia tien: {0}  ",a.maxPrice);
+            }
+        }
         static void Main()
         {
             TaodsNhomCongViec();
@@ -512,6 +533,7 @@ namespace QuanLiKhachSan
             Tan7();
             Tan8();
             Tan9();
+            Tan10();
             Console.ReadKey();
         }
     }
