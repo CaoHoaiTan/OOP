@@ -10,7 +10,7 @@ namespace QuanLiKhachSan
     {
         public string ma_nhomCV { get; set; }
         public string ten_nhomCV { get; set; }
-        public NhomCongViec(string ma_nhomCV,string ten_nhomCV)
+        public NhomCongViec(string ma_nhomCV, string ten_nhomCV)
         {
             this.ma_nhomCV = ma_nhomCV;
             this.ten_nhomCV = ten_nhomCV;

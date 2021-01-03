@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="CongViec.cs" />
     <Compile Include="DichVu.cs" />
+    <Compile Include="DKDichVu.cs" />
     <Compile Include="HoaDon.cs" />
     <Compile Include="HopDong.cs" />
     <Compile Include="KhachHang.cs" />

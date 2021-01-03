@@ -11,7 +11,7 @@ namespace QuanLiKhachSan
         public NhanVien ma_NV { get; set; }
         public DichVu ma_DV { get; set; }
         public CongViec ma_CV { get; set; }
-        public THAOTACDICHVU(NhanVien ma_NV,DichVu ma_DV,CongViec ma_CV)
+        public THAOTACDICHVU(NhanVien ma_NV, DichVu ma_DV, CongViec ma_CV)
         {
             this.ma_NV = ma_NV;
             this.ma_DV = ma_DV;

@@ -11,11 +11,12 @@ namespace QuanLiKhachSan
         public KhachHang ma_KH { get; set; }
         public Phong soPhong { get; set; }
         public HopDong soHD { get; set; }
-        public LAPHOPDONG(KhachHang ma_KH,Phong soPhong,HopDong soHD)
+        public LAPHOPDONG(KhachHang ma_KH, Phong soPhong, HopDong soHD)
         {
             this.ma_KH = ma_KH;
             this.soHD = soHD;
             this.soPhong = soPhong;
+            soPhong.DaThue = true;
         }
         public LAPHOPDONG(LAPHOPDONG LapHD)
         {

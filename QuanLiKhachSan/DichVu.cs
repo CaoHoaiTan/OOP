@@ -9,16 +9,18 @@ namespace QuanLiKhachSan
     public class DichVu
     {
         public string ma_DV { get; set; }
-        public string soTien { get; set; }
-        public DichVu (string ma_DV,string soTien)
+        public double giaTien { get; set; }
+        public string TenDV { get; set; }
+        public DichVu(string ma_DV, string TenDV, double giaTien)
         {
             this.ma_DV = ma_DV;
-            this.soTien = soTien;
+            this.giaTien = giaTien;
+            this.TenDV = TenDV;
         }
-        public DichVu (DichVu DV)
+        public DichVu(DichVu DV)
         {
             this.ma_DV = DV.ma_DV;
-            this.soTien = DV.soTien;
+            this.giaTien = DV.giaTien;
         }
     }
 }

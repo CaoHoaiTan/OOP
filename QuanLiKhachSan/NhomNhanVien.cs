@@ -11,7 +11,7 @@ namespace QuanLiKhachSan
         public string ma_nhomNV { get; set; }
         public string ma_truongNhom { get; set; }
 
-        public NhomNhanVien(string ma_nhomNV,string ma_truongNhom)
+        public NhomNhanVien(string ma_nhomNV, string ma_truongNhom)
         {
             this.ma_nhomNV = ma_nhomNV;
             this.ma_truongNhom = ma_truongNhom;
