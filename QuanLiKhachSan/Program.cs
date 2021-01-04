@@ -481,10 +481,11 @@ namespace QuanLiKhachSan
         public static void Kiet1()
         {
             // Xuat ra danh sach cac Hop dong thue phong VIP
-            var hd =
-                from h in dsHopDong
-                where h.Phong.LoaiPhong.ten_LoaiPhong == "VIP"
-                select h;
+            //var hd =
+            //    from h in dsHopDong
+            //    where h.Phong.LoaiPhong.ten_LoaiPhong == "VIP"
+            //    select h;
+            var hd = dsHopDong.Where(n => n.Phong.LoaiPhong.ten_LoaiPhong == "VIP");
             Console.WriteLine("_________________________________________");
             Console.WriteLine("Cac Hop dong thue phong VIP:");
             foreach (var h in hd)
@@ -493,17 +494,19 @@ namespace QuanLiKhachSan
                 Console.WriteLine(h.ToString());
             }
         }
-       
+
         public static void Kiet2()
         {
             // Liet ke danh sach phong theo tinh trang thue phong
-            var nhomLoaiPhong = from ph in dsPhong
-                                group ph by ph.DaThue;
+            //var nhomLoaiPhong = from ph in dsPhong
+            //                    group ph by ph.DaThue;
+            var nhomLoaiPhong = dsPhong
+                                .GroupBy(ph => ph.DaThue);
             Console.WriteLine("_________________________________________");
             Console.WriteLine("Danh sach cac loai phong:");
             foreach (var nhomlp in nhomLoaiPhong)
             {
-                if(nhomlp.Key == true)
+                if (nhomlp.Key == true)
                     Console.WriteLine("Da thue:");
                 else
                     Console.WriteLine("Chua thue:");
@@ -516,10 +519,14 @@ namespace QuanLiKhachSan
         public static void Kiet3()
         {
             // Xuat thong tin khach hang o KS tren 10 ngay
-            var hd = from k in dsHopDong
-                    group k by k.KH into h
-                    where h.Sum(k=>k.songaythue) >= 10
-                    select h;
+            //var hd = from k in dsHopDong
+            //        group k by k.KH into h
+            //        where h.Sum(k=>k.songaythue) >= 10
+            //        select h;
+            var hd = dsHopDong
+                     .GroupBy(k => k.KH)
+                     .Where(h => h.Sum(k => k.songaythue) >= 10)
+                     .Select(h => h);
             Console.WriteLine("_________________________________________");
             Console.WriteLine("Cac khach hang o KS tren 10 ngay: ");
             foreach (var i in hd)
@@ -532,15 +539,20 @@ namespace QuanLiKhachSan
         public static void Kiet4()
         {
             // Loai phong duoc nhieu nguoi o nhat
-            var nhomlp =
-                from i in dsHopDong
-                group i by i.Phong.LoaiPhong into lp
-                select new { lp, soluong = lp.Count()};
-            int max = (from k in nhomlp
-                       select k.soluong).Max();
+            //var nhomlp =
+            //    from i in dsHopDong
+            //    group i by i.Phong.LoaiPhong into lp
+            //    select new { lp, soluong = lp.Count()};     
+            //int max = (from k in nhomlp
+            //           select k.soluong).Max();
+            var nhomlp = dsHopDong
+                .GroupBy(i => i.Phong.LoaiPhong)
+                .Select(lp => new { lp, soluong = lp.Count() });
+
+            int max = nhomlp.Max(p => p.soluong);
             Console.WriteLine("_________________________________________");
             Console.WriteLine("Loai phong duoc nhieu nguoi o nhat: ");
-            foreach(var i in nhomlp)
+            foreach (var i in nhomlp)
             {
                 if (i.soluong == max)
                     Console.WriteLine(i.lp.Key.ma_LoaiPhong);
@@ -549,12 +561,16 @@ namespace QuanLiKhachSan
         public static void Kiet5()
         {
             // Xuat khach hang dang ky nhieu dich vu nhat
-            var ds =
-                from hd in dsHopDong
-                group hd by hd.KH into g
-                select new { KH = g.Key, soDichVuDK = g.Sum(hd=>hd.DangKiDV.dsDichvu.Count())};
-            var max = (from kh in ds
-                       select kh.soDichVuDK).Max();
+            //var ds =
+            //    from hd in dsHopDong
+            //    group hd by hd.KH into g
+            //    select new { KH = g.Key, soDichVuDK = g.Sum(hd=>hd.DangKiDV.dsDichvu.Count())};
+            //var max = (from kh in ds
+            //           select kh.soDichVuDK).Max();
+            var ds = dsHopDong
+                .GroupBy(hd => hd.KH)
+                .Select(g => new { KH = g.Key, soDichVuDK = g.Sum(hd => hd.DangKiDV.dsDichvu.Count()) });
+            var max = ds.Max(p => p.soDichVuDK);
             Console.WriteLine("_________________________________________");
             Console.WriteLine("Khach hang dang ky nhieu dich vu nhat:");
 
@@ -567,9 +583,10 @@ namespace QuanLiKhachSan
         public static void Kiet6()
         {
             // Liet ke nhan vien trong tung nhom nhan vien
-            var nhomNV = from nnv in dsNhanVien
-                         group nnv by nnv.ma_nhomNV;
-
+            //var nhomNV = from nnv in dsNhanVien
+            //             group nnv by nnv.ma_nhomNV;
+            var nhomNV = dsNhanVien
+                         .GroupBy(nnv => nnv.ma_nhomNV);
             Console.WriteLine("______________________________________________");
             foreach (var group in nhomNV)
             {
@@ -584,25 +601,32 @@ namespace QuanLiKhachSan
         public static void Kiet7()
         {
             // Xuat nhom nhan vien co nhieu nhan vien nhat
-            var nhomNV = from nnv in dsNhanVien
-                         group nnv by nnv.ma_nhomNV into go
-                         select new { Manhom = go.Key.ma_nhomNV, tnv = go.Count()};
-            var sl = (from s in nhomNV
-                      select s.tnv).Max();
+            //var nhomNV = from nnv in dsNhanVien
+            //             group nnv by nnv.ma_nhomNV into go
+            //             select new { Manhom = go.Key.ma_nhomNV, tnv = go.Count()};
+            //var sl = (from s in nhomNV
+            //          select s.tnv).Max();
+            var nhomNV = dsNhanVien
+                         .GroupBy(nnv => nnv.ma_nhomNV)
+                         .Select(go => new { Manhom = go.Key.ma_nhomNV, tnv = go.Count() });
+            var sl = nhomNV.Max(s => s.tnv);
             Console.WriteLine("______________________________________________");
             Console.WriteLine("Nhom nhan vien co nhieu nhan vien nhat: ");
             foreach (var i in nhomNV)
             {
-                if(i.tnv == sl)
+                if (i.tnv == sl)
                     Console.WriteLine("  " + i.Manhom);
             }
         }
         public static void Kiet8()
         {
             // Xuat cac thiet bi trong phong 103V
-            var ds = from p in dsPhong
-                     where p.soPhong == "103V"
-                     select p;
+            //var ds = from p in dsPhong
+            //         where p.soPhong == "103V"
+            //         select p;
+            var ds = dsPhong
+                     .Where(p => p.soPhong == "103V")
+                     .Select(p => p);
             Console.WriteLine("______________________________________________");
             Console.WriteLine("Cac thiet bi trong phong 103V: ");
             foreach (var i in ds)
@@ -614,24 +638,32 @@ namespace QuanLiKhachSan
         public static void Kiet9()
         {
             // Xuat khach hang tra tong tien it nhat
-            var ds =
-                from hd in dsHopDong
-                group hd by hd.KH into g
-                select new { K = g.Key, tongTien = g.Sum(hd => hd.giaTien) };
+            //var ds =
+            //    from hd in dsHopDong
+            //    group hd by hd.KH into g
+            //    select new { K = g.Key, tongTien = g.Sum(hd => hd.giaTien) };
+            //var min = ds.Min(h => h.tongTien);
+            var ds = dsHopDong
+                .GroupBy(hd => hd.KH)
+                .Select(g => new { K = g.Key, tongTien = g.Sum(hd => hd.giaTien) });
             var min = ds.Min(h => h.tongTien);
             Console.WriteLine("_________________________________________");
             foreach (var i in ds)
-                if (i.tongTien==min)
+                if (i.tongTien == min)
                     Console.WriteLine("Khach hang tra it tien nhat: {0}, Tong tien: {1:0,0.0}", i.K.ten_KH, i.tongTien);
         }
         public static void Kiet10()
         {
             // In thong tin hop dong cua Phan Nguyen Chu Kiet nhieu tien nhat 
-            var hd = from p in dsHopDong
-                     where p.NhanVien.ten_NV == "Phan Nguyen Chu Kiet"
-                     select p;
-            double max = (from p in hd
-                          select p.giaTien).Max();
+            //var hd = from p in dsHopDong
+            //         where p.NhanVien.ten_NV == "Phan Nguyen Chu Kiet"
+            //         select p;
+            //double max = (from p in hd
+            //              select p.giaTien).Max();
+            var hd = dsHopDong
+                     .Where(p => p.NhanVien.ten_NV == "Phan Nguyen Chu Kiet")
+                     .Select(p => p);
+            double max = hd.Max(p => p.giaTien);
             Console.WriteLine("_______________________________________");
             Console.WriteLine("Hop dong nhieu tien nhat cua Phan Nguyen Chu Kiet co gia tien: {0:0,0.0}", max);
             foreach (var a in hd)
@@ -643,14 +675,17 @@ namespace QuanLiKhachSan
         public static void Tan1()
         {
             // Liet ke danh sach phong theo loai phong
-            var nhomLoaiPhong = from ph in dsPhong
-                                group ph by ph.LoaiPhong;
+            //var nhomLoaiPhong = from ph in dsPhong
+            //                    group ph by ph.LoaiPhong;
+            var nhomLoaiPhong = dsPhong
+                                .GroupBy(s => s.LoaiPhong)
+                                .Select(s => s);
             Console.WriteLine("_________________________________________");
             Console.WriteLine("Danh sach cac loai phong:");
             foreach (var nhomlp in nhomLoaiPhong)
             {
                 Console.WriteLine(nhomlp.Key.ma_LoaiPhong);
-                foreach ( Phong p in nhomlp)
+                foreach (Phong p in nhomlp)
                 {
                     Console.WriteLine("    {0}", p.soPhong);
                 }
@@ -660,9 +695,12 @@ namespace QuanLiKhachSan
         {
             // Xuat khach hang tra tien nhieu nhat 1 hop dong
             var max = dsHopDong.Max(p => p.giaTien);
-            var kh = from k in dsHopDong
-                     where k.giaTien == max
-                     select k;
+            //var kh = from k in dsHopDong
+            //         where k.giaTien == max
+            //         select k;
+            var kh = dsHopDong
+                .Where(s => s.giaTien == max)
+                .Select(s => s);
             Console.WriteLine("_________________________________________");
             Console.WriteLine("Gia tien khach hang tra lon nhat: {0:0,0.0}", max);
             foreach (var n in kh)
@@ -673,12 +711,15 @@ namespace QuanLiKhachSan
         public static void Tan3()
         {
             // Xuat so Phong con trong theo loai
-            var phong =
-                from p in dsPhong
-                where p.DaThue == false
-                group p by p.LoaiPhong.ten_LoaiPhong into g
-                select new { Phong = g.Key, PhongCount = g.Count() };
-
+            //var phong =
+            //    from p in dsPhong
+            //    where p.DaThue == false
+            //    group p by p.LoaiPhong.ten_LoaiPhong into g
+            //    select new { Phong = g.Key, PhongCount = g.Count() };
+            var phong = dsPhong
+                .Where(s => s.DaThue == false)
+                .GroupBy(s => s.LoaiPhong.ten_LoaiPhong)
+                .Select(p => new { Phong = p.Key, PhongCount = p.Count() });
             Console.WriteLine("_____________________________________");
             Console.WriteLine("So phong con trong: ");
             foreach (var p in phong)
@@ -690,11 +731,15 @@ namespace QuanLiKhachSan
         public static void Tan4()
         {
             // Xuat cac phong con trong
-            var ph =
-                from p in dsPhong
-                where p.DaThue == false
-                group p by p.LoaiPhong.ten_LoaiPhong into g
-                select g;
+            //var ph =
+            //    from p in dsPhong
+            //    where p.DaThue == false
+            //    group p by p.LoaiPhong.ten_LoaiPhong into g
+            //    select g;
+            var ph = dsPhong
+                .Where(p => p.DaThue == false)
+                .GroupBy(p => p.LoaiPhong.ten_LoaiPhong)
+                .Select(p => p);
             Console.WriteLine("_____________________________________");
             Console.WriteLine("Danh sach cac phong con trong:");
             foreach (var k in ph)
@@ -718,10 +763,13 @@ namespace QuanLiKhachSan
         public static void Tan6()
         {
             // Xuất ra thông tin những nhân viên là nhân viên le tan
-            var nv =
-                from p in dsNhanVien
-                where p.CongViec.ten_CV == "Le tan"
-                select p;
+            //var nv =
+            //    from p in dsNhanVien
+            //    where p.CongViec.ten_CV == "Le tan"
+            //    select p;
+            var nv = dsNhanVien
+                .Where(s => s.CongViec.ten_CV == "Le tan")
+                .Select(s => s);
             Console.WriteLine("_______________________________________");
             Console.WriteLine("Danh sach nhan vien le tan:");
             foreach (var n in nv)
@@ -734,9 +782,12 @@ namespace QuanLiKhachSan
         public static void Tan7()
         {
             // Xuat cac hinh thuc thanh toan cua khach hang
-            var dv = from p in dsHopDong
-                     group p by p.phuongThucThanhToan into g
-                     select new { phuongthuc = g.Key, number = g.Count() };
+            //var dv = from p in dsHopDong
+            //         group p by p.phuongThucThanhToan into g
+            //         select new { phuongthuc = g.Key, number = g.Count() };
+            var dv = dsHopDong
+                .GroupBy(p => p.phuongThucThanhToan)
+                .Select(p => new { phuongthuc = p.Key, number = p.Count() });
             Console.WriteLine("_______________________________________");
             Console.WriteLine("Cach hinh thuc thanh toan: ");
             foreach (var d in dv)
@@ -747,11 +798,14 @@ namespace QuanLiKhachSan
         public static void Tan8()
         {
             // So hop dong nhan vien ki duoc sap xep tang dan
-            var nv = from p in dsHopDong
-                     group p by p.NhanVien into g
-                     orderby g.Count()
-                     select new { nhanVien = g.Key, soHD = g.Count() };
-
+            //var nv = from p in dsHopDong
+            //         group p by p.NhanVien into g
+            //         orderby g.Count()
+            //         select new { nhanVien = g.Key, soHD = g.Count() };
+            var nv = dsHopDong
+                .GroupBy(p => p.NhanVien)
+                .OrderBy(p => p.Count())
+                .Select(p => new { nhanVien = p.Key, soHD = p.Count() });
             Console.WriteLine("_______________________________________");
             Console.WriteLine("So hop dong nhan vien ki duoc:");
             foreach (var n in nv)
@@ -762,9 +816,12 @@ namespace QuanLiKhachSan
         public static void Tan9()
         {
             // Danh sach khach hang vs so lan thue
-            var kh = from p in dsHopDong
-                     group p by p.KH into g
-                     select new { khachhang = g.Key, solan = g.Count() };
+            //var kh = from p in dsHopDong
+            //         group p by p.KH into g
+            //         select new { khachhang = g.Key, solan = g.Count() };
+            var kh = dsHopDong
+                .GroupBy(p => p.KH)
+                .Select(p => new { khachhang = p.Key, solan = p.Count() });
             Console.WriteLine("_______________________________________");
             Console.WriteLine("Danh sach khach hang vs so lan thue: ");
             foreach (var i in kh)
@@ -775,11 +832,15 @@ namespace QuanLiKhachSan
         public static void Tan10()
         {
             // In thong tin hop dong cua Cao Hoai Tan nhieu tien nhat 
-            var hd = from p in dsHopDong
-                     where p.NhanVien.ten_NV == "Cao Hoai Tan"
-                     select p;
-            double max = (from p in hd
-                          select p.giaTien).Max();
+            //var hd = from p in dsHopDong
+            //         where p.NhanVien.ten_NV == "Cao Hoai Tan"
+            //         select p;
+            //double max = (from p in hd
+            //              select p.giaTien).Max();
+            var hd = dsHopDong
+                .Where(p => p.NhanVien.ten_NV == "Cao Hoai Tan")
+                .Select(p => p);
+            double max = hd.Max(p => p.giaTien);
             Console.WriteLine("_______________________________________");
             Console.WriteLine("Hop dong nhieu tien nhat cua Cao Hoai Tan co gia tien: {0:0,0.0}", max);
             foreach (var a in hd)
@@ -840,7 +901,90 @@ namespace QuanLiKhachSan
             //Tan8();
             //Tan9();
             //Tan10();
-
+            
+            int c;
+            do
+            {
+                Console.WriteLine("----------------------Cao Hoai Tan-----------------------------------------------");
+                Console.WriteLine("_________________________________________________________________________________");
+                Console.WriteLine("|Cau 1:  LIET KE DANH SACH PHONG THEO LOAI PHONG                                 |");
+                Console.WriteLine("|Cau 2:  XUAT KHACH HANG TRA TIEN NHIEU NHAT TRONG 1 HOP DONG                    |");
+                Console.WriteLine("|Cau 3:  XUAT SO PHONG CON TRONG THEO LOAI                                       |");
+                Console.WriteLine("|Cau 4:  XUAT CAC PHONG CON TRONG                                                |");
+                Console.WriteLine("|Cau 5:  XUAT TONG DANH THU CUA KHACH SAN                                        |");
+                Console.WriteLine("|Cau 6:  XUAT RA THONG TIN NHUNG NHAN VIEN LA NHAN VIEN LE TAN                   |");
+                Console.WriteLine("|Cau 7:  XUAT CAC HINH THUC THANH TOAN CUA KHACH HANG                            |");
+                Console.WriteLine("|Cau 8:  XUAT SO HOP DONG NHAN VIEN KI DUOC SAP XEP TANG DAN                     |");
+                Console.WriteLine("|Cau 9:  XUAT DANH SACH KHACH HANG VOI SO LAN THUE                               |");
+                Console.WriteLine("|Cau 10: IN THONG TIN HOP DONG CUA CAO HOAI TAN NHIEU TIEN NHAT                  |");
+                Console.WriteLine("|________________________________________________________________________________|");
+                Console.WriteLine("----------------------Thai Thanh Nam---------------------------------------------");
+                Console.WriteLine("_________________________________________________________________________________");
+                Console.WriteLine("|Cau 11:  XUAT RA DANH SACH CAC PPHONG THUE VAO NGAY 31/12/2020                  |");
+                Console.WriteLine("|Cau 12:  SAP XEP TEN KHACH HANG THEO TONG GIA TIEN DA THANH TOAN GIAM DAN       |");
+                Console.WriteLine("|Cau 13:  XUAT DANH SACH NHAN VIEN THEO NHOM CONG VIEC                           |");
+                Console.WriteLine("|Cau 14:  XUAT RA TONG SO TIEN DA THU CUA TUNG NHAN VIEN                         |");
+                Console.WriteLine("|Cau 15:  XUAT CAC CONG VIEC TRONG DICH VU CUA TUNG HOP DONG                     |");
+                Console.WriteLine("|Cau 16:  XUAT RA TONG SO TIEN DA THU THEO TUNG HINH THUC THANH TOAN             |");
+                Console.WriteLine("|Cau 17:  XUAT RA PHUONG THUC THANH TOAN DUOC TRA NHIEU TIEN NHAT                |");
+                Console.WriteLine("|Cau 18:  XUAT HOA DON THEO NHAN VIEN THU NGAN                                   |");
+                Console.WriteLine("|Cau 19:  XUAT HOA DON CO KHACH HANG THANH TOAN KHAC KHACH HOP LAP HOP DONG      |");
+                Console.WriteLine("|Cau 20:  IN THONG TIN HOP DONG CUA THAI THANH NAM NHIEU TIEN NHAT               |");
+                Console.WriteLine("|________________________________________________________________________________|");
+                Console.WriteLine("----------------------Phan Nguyen Chu Kiet----------------------------------------");
+                Console.WriteLine("_________________________________________________________________________________");
+                Console.WriteLine("|Cau 21:  XUAT RA DANH SACH CAC HOP DONG THUE PHONG VIP                          |");
+                Console.WriteLine("|Cau 22:  LIET KE DANH SACH PHONG THEO TINH TRANG THUE PHONG                     |");
+                Console.WriteLine("|Cau 23:  XUAT THONG TIN KHACH O KHACH SAN TREN 10 NGAY                          |");
+                Console.WriteLine("|Cau 24:  LOAI PHONG DUOC NHIEU NGUOI O NHAT                                     |");
+                Console.WriteLine("|Cau 25:  XUAT KHACH HANG DANG KY NHIEU DICH VU NHAT                             |");
+                Console.WriteLine("|Cau 26:  LIET KE NHAN VIEN TRONG TUNG NHOM NHAN VIEN                            |");
+                Console.WriteLine("|Cau 27:  XUAT NHOM NHAN VIEN CO NHIEU NHAN VIEN NHAT                            |");
+                Console.WriteLine("|Cau 28:  XUAT CAC THIET BI TRONG PHONG 103V                                     |");
+                Console.WriteLine("|Cau 29:  XUAT KHACH HANG TRA TONG TIEN IT NHAT                                  |");
+                Console.WriteLine("|Cau 30:  IN THONG TIN HOP DONG CUA PHAN NGUYEN CHU KIET NHIEU TIEN NHAT         |");
+                Console.WriteLine("|________________________________________________________________________________|");
+                Console.WriteLine("Nhan phim 0 de thoat khoi chuong trinh");
+                Console.Write("Moi chon cau: ");
+                c = int.Parse(Console.ReadLine());
+                switch (c)
+                {
+                    case 1: Tan1(); break;
+                    case 2: Tan2(); break;
+                    case 3: Tan3(); break;
+                    case 4: Tan4(); break;
+                    case 5: Tan5(); break;
+                    case 6: Tan6(); break;
+                    case 7: Tan7(); break;
+                    case 8: Tan8(); break;
+                    case 9: Tan9(); break;
+                    case 10: Tan10(); break;
+                    case 11: Nam1(); break;
+                    case 12: Nam2(); break;
+                    case 13: Nam3(); break;
+                    case 14: Nam4(); break;
+                    case 15: Nam5(); break;
+                    case 16: Nam6(); break;
+                    case 17: Nam7(); break;
+                    case 18: Nam8(); break;
+                    case 19: Nam9(); break;
+                    case 20: Nam10(); break;
+                    case 21: Kiet1(); break;
+                    case 22: Kiet2(); break;
+                    case 23: Kiet3(); break;
+                    case 24: Kiet4(); break;
+                    case 25: Kiet5(); break;
+                    case 26: Kiet6(); break;
+                    case 27: Kiet7(); break;
+                    case 28: Kiet8(); break;
+                    case 29: Kiet9(); break;
+                    case 30: Kiet10(); break;
+                }
+                Console.WriteLine("Cam on Thay da xem!");
+                Console.WriteLine(">>===========>> Nhan phim bat ky de tiep tuc <<===========<<");
+                Console.ReadKey();
+                Console.Clear();
+            } while (c >= 1 && c <= 30);
             Console.ReadKey();
         }
     }
